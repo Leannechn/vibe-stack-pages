@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Coding 入门课 · 课程大纲</title>
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <style>
+    /* ===== Hero ===== */
+    .hero {
+      background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 50%, #00cec9 100%);
+      color: #fff;
+      padding: 80px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: var(--light);
+      border-radius: 50% 50% 0 0;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.3em;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .hero .tagline {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+    }
+
+    /* ===== Info Cards ===== */
+    .info-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: -50px;
+      position: relative;
+      z-index: 1;
+    }
+    .info-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .info-card:hover { transform: translateY(-3px); }
+    .info-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .info-card .label {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+    .info-card .value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    /* ===== Outcome ===== */
+    .outcome {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+    .outcome h2 {
+      font-size: 1.6rem;
+      color: var(--dark);
+      margin-bottom: 2rem;
+    }
+    .outcome-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .outcome-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .outcome-card .num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .outcome-card .text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .outcome-card .sub {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    /* ===== Skills ===== */
+    .skills {
+      padding: 40px 0 60px;
+    }
+    .skills h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .skill-item {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      border-left: 4px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .skill-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    .skill-item:nth-child(even) { border-left-color: var(--accent); }
+    .skill-item .skill-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+    .skill-item .skill-desc {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ===== Curriculum ===== */
+    .curriculum {
+      padding: 60px 0;
+      background: #fff;
+    }
+    .curriculum h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 3rem;
+    }
+
+    .week-block {
+      margin-bottom: 48px;
+    }
+    .week-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .week-num {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .week-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .week-focus {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .lesson {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 28px 28px;
+      margin-bottom: 16px;
+      margin-left: 64px;
+      border-left: 4px solid var(--primary-light);
+    }
+    .lesson-num {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .lesson-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .lesson-goal {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 3px solid var(--accent);
+    }
+    .lesson-items {
+      list-style: none;
+    }
+    .lesson-items li {
+      font-size: 0.92rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      display: flex;
+      gap: 10px;
+    }
+    .lesson-items li:last-child { border-bottom: none; }
+    .lesson-items .item-label {
+      font-weight: 600;
+      color: var(--dark);
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+    .lesson-items .item-desc {
+      color: var(--gray);
+    }
+
+    /* Week 4 special */
+    .week-block.qa .week-num {
+      background: linear-gradient(135deg, var(--accent), #00b894);
+    }
+    .week-block.qa .lesson {
+      border-left-color: var(--accent);
+    }
+    .week-block.qa .lesson-num {
+      color: var(--accent);
+    }
+
+    /* ===== Milestones ===== */
+    .milestones {
+      padding: 60px 0;
+      background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+      color: #fff;
+    }
+    .milestones h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 3rem;
+    }
+    .milestone-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .milestone-track::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 12%;
+      right: 12%;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+    }
+    .milestone-item {
+      text-align: center;
+      position: relative;
+    }
+    .milestone-dot {
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .milestone-item h4 {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .milestone-item .skill-tag {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+    .milestone-item .output {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.5;
+      padding: 0 8px;
+    }
+
+    /* ===== Philosophy ===== */
+    .philosophy {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .philosophy blockquote {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .philosophy .points {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 2rem;
+    }
+    .philosophy .point {
+      text-align: center;
+    }
+    .philosophy .point .point-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .philosophy .point .point-desc {
+      font-size: 0.88rem;
+      color: var(--gray);
+      max-width: 180px;
+    }
+    .philosophy .footnote {
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 32px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .tagline { font-size: 1rem; padding: 0 16px; }
+      .info-bar { grid-template-columns: repeat(2, 1fr); }
+      .outcome-cards { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .lesson { margin-left: 0; }
+      .milestone-track { grid-template-columns: 1fr; gap: 24px; }
+      .milestone-track::before { display: none; }
+      .philosophy .points { flex-direction: column; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container">
+      <h1>Vibe Coding 入门课</h1>
+      <p class="tagline">不写一行代码，用 AI 打造你的微信小程序<br>从零基础到上线发布，4 周搞定</p>
+      <span class="badge">零基础 · 纯 AI 协作 · 实战导向</span>
+    </div>
+  </div>
+
+  <!-- Info Bar -->
+  <div class="container">
+    <div class="info-bar">
+      <div class="info-card">
+        <div class="icon">&#127891;</div>
+        <div class="label">适用对象</div>
+        <div class="value">零基础学员</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#128197;</div>
+        <div class="label">课程周期</div>
+        <div class="value">4 周 · 6+1 节</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#9200;</div>
+        <div class="label">每节时长</div>
+        <div class="value">1.5–2 小时</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#128640;</div>
+        <div class="label">最终产出</div>
+        <div class="value">上线的小程序</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outcome -->
+  <div class="outcome container">
+    <h2>课程结束后，你将拥有</h2>
+    <div class="outcome-cards">
+      <div class="outcome-card">
+        <div class="num">01</div>
+        <div class="text">一套 AI 协作开发方法</div>
+        <div class="sub">可复用到任何软件开发场景</div>
+      </div>
+      <div class="outcome-card">
+        <div class="num">02</div>
+        <div class="text">一个已上线的微信小程序</div>
+        <div class="sub">图文展示 · 用户登录 · 联系方式留存</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <section class="skills">
+    <div class="container">
+      <h2>你将掌握的 6 项核心技能</h2>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-name">需求描述</div>
+          <div class="skill-desc">把模糊想法转化为 AI 能理解的清晰指令</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">提示词迭代</div>
+          <div class="skill-desc">根据 AI 输出调整提示词，逼近理想结果</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">代码审查</div>
+          <div class="skill-desc">判断 AI 生成的代码是否符合预期，不盲目接受</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">模块化思维</div>
+          <div class="skill-desc">把大需求拆成小任务，逐个让 AI 完成</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">调试与修复</div>
+          <div class="skill-desc">遇到问题时用 AI 排查错误，而不是自己死磕</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-name">交付上线</div>
+          <div class="skill-desc">从开发环境到真实用户的完整流程</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum -->
+  <section class="curriculum">
+    <div class="container">
+      <h2>课程大纲</h2>
+
+      <!-- Week 1 -->
+      <div class="week-block">
+        <div class="week-header">
+          <div class="week-num">W1</div>
+          <div>
+            <div class="week-title">破冰 — 理解 AI 编程的工作方式</div>
+            <div class="week-focus">聚焦：需求描述 · 提示词迭代</div>
+          </div>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">第 1 节</div>
+          <div class="lesson-title">Vibe Coding 是什么，工具怎么装</div>
+          <div class="lesson-goal">目标：说清楚 Vibe Coding 与传统编程的区别，完成所有工具安装</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">Vibe Coding 理念</span><span class="item-desc">你是产品经理，AI 是程序员——你不写代码，你管理 AI 写代码</span></li>
+            <li><span class="item-label">工具准备</span><span class="item-desc">AI 对话工具三选一：Qoder CN（国内可用）/ Claude / Cursor</span></li>
+            <li><span class="item-label">认识小程序</span><span class="item-desc">安装微信开发者工具，了解小程序是什么、能做什么</span></li>
+            <li><span class="item-label">动手实操</span><span class="item-desc">新建项目，运行官方示例，体验从 0 到跑起来的成就感</span></li>
+          </ul>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">第 2 节</div>
+          <div class="lesson-title">用 AI 生成图文列表页 + 页面跳转</div>
+          <div class="lesson-goal">目标：向 AI 描述页面需求，实现首页图文列表与点击跳转详情页</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">页面结构</span><span class="item-desc">一个页面由哪些文件组成，各自负责什么（结构 / 样式 / 逻辑）</span></li>
+            <li><span class="item-label">提示词技巧</span><span class="item-desc">从"帮我做一个好看的页面"升级到精确描述卡片布局</span></li>
+            <li><span class="item-label">模块化思维</span><span class="item-desc">把需求拆成"列表展示"和"详情查看"两个独立任务</span></li>
+            <li><span class="item-label">数据驱动与跳转</span><span class="item-desc">描述多条数据循环展示 + 点击跳转详情页</span></li>
+            <li><span class="item-label">动手实操</span><span class="item-desc">用 AI 生成首页图文列表，实现点击卡片跳转详情页</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="week-block">
+        <div class="week-header">
+          <div class="week-num">W2</div>
+          <div>
+            <div class="week-title">迭代与组合 — 让小程序成型</div>
+            <div class="week-focus">聚焦：截图反馈 · 样式迭代 · API 概念 · 调试入门</div>
+          </div>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">第 3 节</div>
+          <div class="lesson-title">详情页美化 + 导航框架搭建</div>
+          <div class="lesson-goal">目标：用截图迭代出满意的视觉效果，搭建完整的 App 导航结构</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">迭代工作流</span><span class="item-desc">"先生成 → 看到问题 → 针对性修改提示词"的循环方法</span></li>
+            <li><span class="item-label">截图沟通法</span><span class="item-desc">截图发给 AI 并标注修改点，效率远高于纯文字描述</span></li>
+            <li><span class="item-label">样式与素材</span><span class="item-desc">用自然语言调整颜色、间距、圆角，替换为真实素材</span></li>
+            <li><span class="item-label">从单页到 App</span><span class="item-desc">向 AI 描述底部导航栏，整合为完整 App</span></li>
+            <li><span class="item-label">动手实操</span><span class="item-desc">完善详情页视觉效果，添加导航栏，整合为完整 App</span></li>
+          </ul>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">第 4 节</div>
+          <div class="lesson-title">微信登录 + 数据存储</div>
+          <div class="lesson-goal">目标：实现微信登录，根据登录状态展示不同界面，数据存入云端不丢失</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">API 概念</span><span class="item-desc">什么是接口，AI 怎么知道调用哪个</span></li>
+            <li><span class="item-label">登录流程</span><span class="item-desc">用户点击 → 弹出授权 → 获取信息 → 显示头像</span></li>
+            <li><span class="item-label">条件逻辑</span><span class="item-desc">用"如果…就…"描述：未登录显示按钮，已登录显示信息</span></li>
+            <li><span class="item-label">数据库入门</span><span class="item-desc">用"表格"理解数据库，描述"登录时保存、打开时读取"</span></li>
+            <li><span class="item-label">调试技巧</span><span class="item-desc">代码报错？把错误信息直接发给 AI 让它修复</span></li>
+            <li><span class="item-label">动手实操</span><span class="item-desc">实现登录 + 个人中心，数据存入云数据库</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="week-block">
+        <div class="week-header">
+          <div class="week-num">W3</div>
+          <div>
+            <div class="week-title">交付 — 从开发到上线</div>
+            <div class="week-focus">聚焦：表单设计 · 全流程联调 · 上线发布</div>
+          </div>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">第 5 节</div>
+          <div class="lesson-title">联系方式表单 — 从填写到云端存储</div>
+          <div class="lesson-goal">目标：用 AI 生成带验证的表单，打通"填写 → 提交 → 后台查看"全流程</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">表单需求描述</span><span class="item-desc">姓名、手机号、微信号、备注，手机号必填</span></li>
+            <li><span class="item-label">验证与体验</span><span class="item-desc">用规则提需求："手机号必须 11 位"；描述成功提示</span></li>
+            <li><span class="item-label">全流程联调</span><span class="item-desc">表单提交与云数据库打通，验证端到端数据流通</span></li>
+            <li><span class="item-label">后台管理</span><span class="item-desc">在云开发控制台查看用户提交的数据</span></li>
+            <li><span class="item-label">问题排查</span><span class="item-desc">检查网络、看报错信息、用 AI 定位原因</span></li>
+            <li><span class="item-label">动手实操</span><span class="item-desc">跑通"填写 → 提交 → 后台查看"全流程</span></li>
+          </ul>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">第 6 节</div>
+          <div class="lesson-title">测试、发布、上线</div>
+          <div class="lesson-goal">目标：完成小程序上线，掌握后续迭代方法</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">完整测试</span><span class="item-desc">真机预览，走完所有功能流程，发现问题用 AI 修复</span></li>
+            <li><span class="item-label">上线流程</span><span class="item-desc">版本管理 → 提交审核 → 发布 → AppID 配置</span></li>
+            <li><span class="item-label">持续迭代</span><span class="item-desc">上线后有新需求？继续用 Vibe Coding 方法描述需求即可</span></li>
+            <li><span class="item-label">课程总结</span><span class="item-desc">回顾核心技能，如何将方法迁移到其他项目</span></li>
+            <li><span class="item-label">动手实操</span><span class="item-desc">完成提审并上线</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="week-block qa">
+        <div class="week-header">
+          <div class="week-num">W4</div>
+          <div>
+            <div class="week-title">答疑周 — 解决真实问题</div>
+            <div class="week-focus">聚焦：在实际使用中遇到的问题，一对一解决</div>
+          </div>
+        </div>
+
+        <div class="lesson">
+          <div class="lesson-num">1v1 答疑</div>
+          <div class="lesson-title">你的问题，现场解决</div>
+          <ul class="lesson-items">
+            <li><span class="item-label">问题答疑</span><span class="item-desc">针对上线后遇到的审核问题、用户反馈、功能异常进行 1v1 指导</span></li>
+            <li><span class="item-label">项目优化</span><span class="item-desc">根据真实使用数据或反馈，用 Vibe Coding 方法优化现有功能</span></li>
+            <li><span class="item-label">需求扩展</span><span class="item-desc">想加新功能？现场演示如何用 Vibe Coding 方法推进</span></li>
+            <li><span class="item-label">方法复盘</span><span class="item-desc">总结已内化的技能，规划后续学习方向</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Milestones -->
+  <section class="milestones">
+    <div class="container">
+      <h2>项目里程碑</h2>
+      <div class="milestone-track">
+        <div class="milestone-item">
+          <div class="milestone-dot">W1</div>
+          <h4>需求描述 + 提示词迭代</h4>
+          <div class="output">首页图文列表可运行<br>点击可跳转详情页</div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-dot">W2</div>
+          <h4>截图反馈 + 调试</h4>
+          <div class="output">详情页满意，导航就位<br>微信登录可用，数据上云</div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-dot">W3</div>
+          <h4>全流程联调 + 上线</h4>
+          <div class="output">联系方式表单完整<br>小程序正式上线</div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-dot">W4</div>
+          <h4>答疑 + 持续迭代</h4>
+          <div class="output">解决真实问题<br>独立推进新需求</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="philosophy">
+    <div class="container">
+      <blockquote>
+        Vibe Coding 不是让你变成程序员，<br>而是让你成为 AI 的产品经理。
+      </blockquote>
+      <div class="points">
+        <div class="point">
+          <div class="point-title">需求描述能力</div>
+          <div class="point-desc">清晰地知道你想要什么</div>
+        </div>
+        <div class="point">
+          <div class="point-title">审查能力</div>
+          <div class="point-desc">判断 AI 生成的东西对不对</div>
+        </div>
+        <div class="point">
+          <div class="point-title">系统思维</div>
+          <div class="point-desc">知道怎么把各部分组合起来</div>
+        </div>
+      </div>
+      <p class="footnote">这套方法不只适用于小程序——任何需要软件开发的场景，你都可以用 Vibe Coding 来推进。</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Vibe Coding 课程</p>
+  </footer>
+
+</body>
+</html>

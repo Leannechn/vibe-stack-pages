@@ -228,6 +228,14 @@
       color: var(--dark);
       margin-bottom: 8px;
     }
+    .lesson-link {
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .lesson-link:hover {
+      color: var(--primary);
+    }
     .lesson-goal {
       font-size: 0.9rem;
       color: var(--gray);
@@ -497,7 +505,7 @@
 
         <div class="lesson">
           <div class="lesson-num">第 1 节</div>
-          <div class="lesson-title">Vibe Coding 是什么，工具怎么装</div>
+          <div class="lesson-title"><a href="lesson-01-guide.html" class="lesson-link">Vibe Coding 是什么，工具怎么装 &rarr;</a></div>
           <div class="lesson-goal">目标：说清楚 Vibe Coding 与传统编程的区别，完成所有工具安装</div>
           <ul class="lesson-items">
             <li><span class="item-label">Vibe Coding 理念</span><span class="item-desc">你是产品经理，AI 是程序员——你不写代码，你管理 AI 写代码</span></li>
